@@ -19,39 +19,33 @@ public class CalculatorRest {
     	Stack<Double> stack = new Stack<Double>();
     	double arg1, arg2, result, number;
     	for (int i = 0; i < elements.length; i++) {
-    		switch (elements[i]) {
-	    		case "+":
-	    			arg2 = (double)stack.pop();
-	    			arg1 = (double)stack.pop();
-	    			result = arg1 + arg2;
-	    			stack.push(result);
-	    			break;
-	    		case "-":
-	    			arg2 = (double)stack.pop();
-	    			arg1 = (double)stack.pop();
-	    			result = arg1 - arg2;
-	    			stack.push(result);
-	    			break;
-	    		case ":":
-	    			arg2 = (double)stack.pop();
-	    			arg1 = (double)stack.pop();
-	    			result = arg1 / arg2;
-	    			stack.push(result);
-	    			break;
-	    		case "*":
-	    			arg2 = (double)stack.pop();
-	    			arg1 = (double)stack.pop();
-	    			result = arg1 * arg2;
-	    			stack.push(result);
-	    			break;
-	    		default:
-	    			number = Double.parseDouble(elements[i]);
-	    			stack.push(number);
+    		if (elements[i].equals("+")) {
+    			arg2 = (double)stack.pop();
+    			arg1 = (double)stack.pop();
+    			result = arg1 + arg2;
+    			stack.push(result);
+    		} else if (elements[i].equals("-")) {
+    			arg2 = (double)stack.pop();
+    			arg1 = (double)stack.pop();
+    			result = arg1 - arg2;
+    			stack.push(result);
+    		} else if (elements[i].equals(":")) {
+    			arg2 = (double)stack.pop();
+    			arg1 = (double)stack.pop();
+    			result = arg1 / arg2;
+    			stack.push(result);
+    		} else if (elements[i].equals("*")) {
+    			arg2 = (double)stack.pop();
+    			arg1 = (double)stack.pop();
+    			result = arg1 * arg2;
+    			stack.push(result);
+    		} else {
+    			number = Double.parseDouble(elements[i]);
+    			stack.push(number);
     		}
     	}
     	
         return Double.toString(stack.pop());
     }
- 
 
 }
