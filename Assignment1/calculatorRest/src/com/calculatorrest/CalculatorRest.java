@@ -1,51 +1,39 @@
 package com.calculatorrest;
 
-import java.util.Stack;
+import java.util.EmptyStackException;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
  
 @Path("/calc")
+/**
+ * Simple stateless calculator.
+ */
 public class CalculatorRest {
  
     @GET
     @Path("/{equation}")
     @Produces(MediaType.TEXT_PLAIN)
-    public String addPlainText(@PathParam("equation") String equation) {
-    	String[] elements = equation.split("&");
-    	Stack<Double> stack = new Stack<Double>();
-    	double arg1, arg2, result, number;
-    	for (int i = 0; i < elements.length; i++) {
-    		if (elements[i].equals("+")) {
-    			arg2 = (double)stack.pop();
-    			arg1 = (double)stack.pop();
-    			result = arg1 + arg2;
-    			stack.push(result);
-    		} else if (elements[i].equals("-")) {
-    			arg2 = (double)stack.pop();
-    			arg1 = (double)stack.pop();
-    			result = arg1 - arg2;
-    			stack.push(result);
-    		} else if (elements[i].equals(":")) {
-    			arg2 = (double)stack.pop();
-    			arg1 = (double)stack.pop();
-    			result = arg1 / arg2;
-    			stack.push(result);
-    		} else if (elements[i].equals("*")) {
-    			arg2 = (double)stack.pop();
-    			arg1 = (double)stack.pop();
-    			result = arg1 * arg2;
-    			stack.push(result);
-    		} else {
-    			number = Double.parseDouble(elements[i]);
-    			stack.push(number);
-    		}
+    public Response calculate(@PathParam("equation") String equation) {
+    	Calculator calculator = new Calculator();
+    	String returnValue = null;
+    	try {
+    		returnValue = calculator.calculate(equation);
+    	} catch (EmptyStackException e) {
+    		return Response.status(400).entity("syntax error").build();
+    	} catch (ArithmeticException e) {
+    		return Response.status(400).entity("division by zero").build();
+    	} catch (NumberFormatException e) {
+    		return Response.status(400).entity("syntax error").build();
     	}
-    	
-        return Double.toString(stack.pop());
+    	if (returnValue == null) {
+    		return Response.status(400).entity("syntax error").build();
+    	}
+    	return Response.ok(returnValue).build();
     }
 
 }
