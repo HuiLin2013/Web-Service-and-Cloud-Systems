@@ -1,12 +1,12 @@
 package com.calculatorrest;
 
-
-
 import java.io.IOException;
 import com.sun.jersey.api.container.httpserver.HttpServerFactory;
 import com.sun.net.httpserver.HttpServer;
 
- 
+/**
+ * Serves our RESTful Calculators.
+ */
 public class CalculatorRestStartUp {
  
     static final String BASE_URI = "http://localhost:9999/calcrest/";

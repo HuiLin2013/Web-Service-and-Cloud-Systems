@@ -19,14 +19,23 @@ import com.sun.jersey.spi.resource.Singleton;
 @Path("/calc2")
 @Singleton
 /**
- * Statefull calculator.
+ * Stateful calculator.
  */
 public class CalculatorRest2 {
 
+	/**
+	 * Holds all equations. 
+	 */
 	private ArrayList<String> equations;
 	
+	/**
+	 * Evaluates equations.
+	 */
 	private Calculator calculator;
 	
+	/**
+	 * Initializes the list and the calculator.
+	 */
 	public CalculatorRest2() {
 		equations = new ArrayList<String>();
 		calculator = new Calculator();
@@ -35,12 +44,15 @@ public class CalculatorRest2 {
 	@GET
     @Path("/{id}")
     @Produces(MediaType.TEXT_PLAIN)
+	/**
+	 * Retrieves the result of a given equation.
+	 * @param id
+	 * @return
+	 */
     public Response getEquation(@PathParam("id") int id) {
 		// Check if the equation exists.
 		String returnValue = null;
 		try {
-			System.out.println("Getting: " + id);
-			System.out.println("Size: " + equations.size());
 			returnValue = equations.get(id);
 			if (returnValue == null) {
 				return Response.status(404).build();
@@ -54,6 +66,12 @@ public class CalculatorRest2 {
 	@PUT
     @Path("/{id}")
     @Produces(MediaType.TEXT_PLAIN)
+	/**
+	 * Put a new equation.
+	 * @param id
+	 * @param equation
+	 * @return
+	 */
     public Response putEquation(@PathParam("id") int id, @FormParam("equation") String equation) {
 		// Check if the equation exists.
 		if (equations.size() <= id || id < 0 || equations.get(id) == null) {
@@ -61,11 +79,9 @@ public class CalculatorRest2 {
 		}
 		
 		// See if we have to replace a ACC occurrence.
-		System.out.println("Before replace: " + equation);
 		if (equation.contains("ACC")) {
 			equation = equation.replaceAll("ACC", equations.get(id));
 		}
-		System.out.println("After replace: " + equation);
 		
 		// Calculate the equation.
 		String value = null;
@@ -90,6 +106,11 @@ public class CalculatorRest2 {
 	@DELETE
 	@Path("/{id}")
 	@Produces(MediaType.TEXT_PLAIN)
+	/**
+	 * Delete a given equation.
+	 * @param id
+	 * @return
+	 */
 	public Response deleteEquation(@PathParam("id") int id) {
 		// Check if the equation exists.
 		if (equations.size() <= id || id < 0 || equations.get(id) == null) {
@@ -104,6 +125,10 @@ public class CalculatorRest2 {
 	@GET
     @Path("/")
     @Produces(MediaType.TEXT_PLAIN)
+	/**
+	 * Retrieve all equations.
+	 * @return
+	 */
     public Response getEquations() {
 		// Collect and return all equation IDs.
 		StringBuilder s = new StringBuilder();
@@ -120,6 +145,11 @@ public class CalculatorRest2 {
 	@POST
     @Path("/")
     @Produces(MediaType.TEXT_PLAIN)
+	/**
+	 * Add a new equation.
+	 * @param equation
+	 * @return
+	 */
     public Response postEquation(@FormParam("equation") String equation) {
 		// Calculate the equation.
 		String value = null;
@@ -138,14 +168,16 @@ public class CalculatorRest2 {
     	
     	// Store the equation.
     	equations.add(value);
-    	System.out.println("Created: " + Integer.toString(equations.size() - 1));
-    	System.out.println("Size: " + equations.size());
     	return Response.status(201).entity(Integer.toString(equations.size() - 1)).build();
 	}
 	
 	@DELETE
 	@Path("/")
 	@Produces(MediaType.TEXT_PLAIN)
+	/**
+	 * Delete all equations.
+	 * @return
+	 */
 	public Response deleteEquations() {
 		// Delete all equations.
 		for (int i = 0; i < equations.size(); i++) {

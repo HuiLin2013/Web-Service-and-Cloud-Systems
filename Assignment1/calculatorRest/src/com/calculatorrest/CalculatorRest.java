@@ -18,6 +18,11 @@ public class CalculatorRest {
     @GET
     @Path("/{equation}")
     @Produces(MediaType.TEXT_PLAIN)
+    /**
+     * Evaluates and returns a given RPN equation.
+     * @param equation
+     * @return
+     */
     public Response calculate(@PathParam("equation") String equation) {
     	Calculator calculator = new Calculator();
     	String returnValue = null;
