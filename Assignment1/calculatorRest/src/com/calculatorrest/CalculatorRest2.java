@@ -27,6 +27,20 @@ public class CalculatorRest2 {
 	@GET
     @Path("/{id}")
     @Produces(MediaType.TEXT_PLAIN)
+    public Response getEquation(@PathParam("id") int id) {
+		// Check if the equation exists.
+		String returnValue = null;
+		try {
+			returnValue = equations.get(id);
+		} catch (IndexOutOfBoundsException e) {
+			return Response.status(404).build();
+		}
+		return Response.ok(returnValue).build();
+	}
+	
+	@PUT
+    @Path("/{id}")
+    @Produces(MediaType.TEXT_PLAIN)
     public Response calculate(@PathParam("id") int id) {
 		// Check if the equation exists.
 		String returnValue = null;
