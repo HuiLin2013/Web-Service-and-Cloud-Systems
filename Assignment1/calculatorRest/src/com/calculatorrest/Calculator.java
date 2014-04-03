@@ -3,10 +3,6 @@ package com.calculatorrest;
 import java.util.EmptyStackException;
 import java.util.Stack;
 
-import javax.ws.rs.core.Response;
-
-import com.sun.org.apache.xpath.internal.operations.Div;
-
 public class Calculator {
 
 	public String calculate(String equation) throws EmptyStackException, ArithmeticException, NumberFormatException {
