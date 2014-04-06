@@ -1,0 +1,17 @@
+/* ========================
+ * JAX-WS SOAP webservice
+ * ========================
+ * Hui Lin & Ove Danner
+ */
+
+To use the included CalculatorClient, you need to run the
+CalculatorPublisher, which publishes the WSDL file locally
+on the following URL: http://localhost:8080/WS/Calculator?wsdl
+The CalculatorClient will simply show that the Calculator web
+service works by printing some simple calculations.
+
+You can also deploy the included WAR file on a Tomcat installation
+(assuming you have the correct JAX-WS dependencies for Tomcat
+installed). If you have copied the file into the webapps directory
+of Tomcat, you will find the WSDL file on the following URL:
+http://localhost:8080/CalculatorSOAP/calculator?wsdl
