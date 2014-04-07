@@ -1,0 +1,18 @@
+/* ========================
+ * JAX-RS REST web service
+ * ========================
+ * Hui Lin & Ove Danner
+ */
+To use the clients made by Mikolaj to test both the stateless
+and the stateful Calculator web services, you have to run
+CalculatorRestStartUp. This program makes sure that that the
+stateless Calculator web service is served on:
+
+http://localhost:9999/calcrest/calc
+
+and the stateful Calculator web service is served on:
+
+http://localhost:9999/calcrest/calc2
+
+Note: both Calculator web services only support Reversed
+Polish Notation (RPN)
