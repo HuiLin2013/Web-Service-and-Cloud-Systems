@@ -3,6 +3,9 @@
  * ========================
  * Hui Lin & Ove Danner
  */
+In order to compile the given Java files, you need to add the
+three included JAR files to your classpath.
+
 To use the clients made by Mikolaj to test both the stateless
 and the stateful Calculator web services, you have to run
 CalculatorRestStartUp. This program makes sure that that the

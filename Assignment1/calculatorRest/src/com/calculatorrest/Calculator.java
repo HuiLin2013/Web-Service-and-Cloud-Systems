@@ -3,6 +3,9 @@ package com.calculatorrest;
 import java.util.EmptyStackException;
 import java.util.Stack;
 
+/**
+ * Calculator that solves RPN equations.
+ */
 public class Calculator {
 
 	public String calculate(String equation) throws EmptyStackException, ArithmeticException, NumberFormatException {
