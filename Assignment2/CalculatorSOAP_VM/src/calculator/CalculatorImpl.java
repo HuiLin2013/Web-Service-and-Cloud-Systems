@@ -6,23 +6,25 @@ import javax.jws.WebService;
 public class CalculatorImpl implements Calculator {
 
 	@Override
-	public Double add(double x, double y) {
-		return x + y;
+	public double sub(double arg0, double arg1) {
+		return arg0 - arg1;
 	}
 
 	@Override
-	public Double sub(double x, double y) {
-		return x - y;
+	public double mul(double arg0, double arg1) {
+		return arg0 * arg1;
 	}
 
 	@Override
-	public Double mul(double x, double y) {
-		return x * y;
+	public double div(double arg0, double arg1) {
+		return arg0 / arg1;
 	}
 
 	@Override
-	public Double div(double x, double y) {
-		return x / y;
+	public double add(double arg0, double arg1) {
+		return arg0 + arg1;
 	}
+
+
 
 }
