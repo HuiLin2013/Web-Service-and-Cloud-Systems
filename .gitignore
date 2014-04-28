@@ -16,3 +16,7 @@ hs_err_pid*
 
 # Archive files #
 *.tar
+
+# Plot and data files #
+*.gnu
+*.data
