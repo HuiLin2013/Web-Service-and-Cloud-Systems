@@ -1,0 +1,31 @@
+NAME   = pmknode
+CPU    = 0.1
+MEMORY = 256
+DISK   = [ 
+	IMAGE_ID = 80
+]
+
+NIC    = [ NETWORK_ID = 2 ]
+
+FEATURES=[ acpi="no" ]
+
+OS     = [
+  arch = x86_64
+]
+
+GRAPHICS = [
+  TYPE    = "vnc",
+  LISTEN  = "0.0.0.0"
+]
+
+CONTEXT=[
+  HOSTNAME = "$NAME-$VMID",
+  ETH0_IP = "$NIC[IP, NETWORK=\"VM-network\"]",
+  ETH0_NETWORK = "$NETWORK[NETWORK_ADDRESS, NETWORK=\"VM-network\"]",
+  ETH0_MASK = "$NETWORK[NETMASK, NETWORK=\"VM-network\"]",
+  ETH0_GATEWAY = "$NETWORK[GATEWAY, NETWORK=\"VM-network\"]",
+  ETH0_DNS = "$NETWORK[DNS, NETWORK=\"VM-network\"]",
+  FILES_DS = "$FILE[IMAGE_ID=43] $FILE[IMAGE_ID=135]",
+  INIT_SCRIPTS = "start_calculator",
+  SSH_PUBLIC_KEY = "ssh-dss AAAAB3NzaC1kc3MAAACBAM5ZxmoLM7fMdV9ccX3j6ZNuFOfvh5tiY0qkfiXBVgt29sz/icfkBtVQCb5kuM/uZgLWXP0XNPb5F7ltXEvWZCQpYfnM6L01XE9oyLaFL46zD6ujxcCuXpUuAlYdGQ2LrnzyWmrJ0XgHL5WIoRGnR8fpyK8B9nPlkdmw2qhZkfy9AAAAFQDN1DydCNN1GtE80oWYauQ7QOlKSwAAAIA4xfdv6lHPIvcfAI+StNbxKmNfhDWMFRantYUbhcM7SLfO3aCjCmihCqBMw3cf/ZlBjYWLzujnUnD167bCLmimI7z2sJzuw181SEOfDjzd9gh/jQ6HLe8FycpDA8jInPVCfmjoPz1vV8klReDU4kJpSvkfHEgLV7cypxzVCP0qPwAAAIAnWHr1o5bxidAqrlXdXyuu8wKhYWzolhMuknccHoNoLJaO0/sVZ6nPyEEGZpVV6LR0ILJ0/wtD4E0Rf3kMtu7uarJVIhV3V5liTJBtNgtnbBd44Q/B8sI5ahl1NZoVNsDX1oYt/zY5JdmFRu/j2u1AG159GJUjNgyuyoIfJbuhPw== soa08@fs2"
+]
